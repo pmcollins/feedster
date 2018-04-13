@@ -12,7 +12,7 @@
 
 @interface Article : NSManagedObject
 {
-	NSUInteger order;
+    NSUInteger order;
 }
 
 @property (nonatomic, strong) NSString * body;
