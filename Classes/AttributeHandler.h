@@ -10,7 +10,7 @@
 #import "NodeHandler.h"
 
 @interface AttributeHandler : NodeHandler {
-	NSDictionary *propertyDict;
+    NSDictionary *propertyDict;
 }
 
 - (id)initWithAttributeName:(NSString *)n property:(NSString *)p;
