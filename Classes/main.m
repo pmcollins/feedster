@@ -12,9 +12,11 @@
 
 int main(int argc, char *argv[]) {
     @autoreleasepool {
-        return UIApplicationMain(argc,
-                                 argv,
-                                 NSStringFromClass([ReaderApplication class]),
-                                 NSStringFromClass([XReaderAppDelegate class]));
+        return UIApplicationMain(
+            argc,
+            argv,
+            NSStringFromClass([ReaderApplication class]),
+            NSStringFromClass([XReaderAppDelegate class])
+        );
     }
 }
