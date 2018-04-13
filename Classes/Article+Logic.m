@@ -53,14 +53,14 @@
     //poor performance, not using the index?
     //NSPredicate *p = [NSPredicate predicateWithFormat:@"guid == %@ AND feed == %@", self.guid, self.feed];
     [req setPredicate:p];
-	NSError *e;
+    NSError *e;
     NSUInteger out = [ctx countForFetchRequest:req error:&e];
-	return out > 1;
+    return out > 1;
 }
 
 - (void)setMediaLengthStr:(NSString *)str
 {
-	self.mediaLength = [[[NSNumberFormatter alloc] init] numberFromString:str];
+    self.mediaLength = [[[NSNumberFormatter alloc] init] numberFromString:str];
 }
 
 - (NSString *)mediaFname
