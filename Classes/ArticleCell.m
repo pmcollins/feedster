@@ -47,10 +47,10 @@
     if (article == nil) {
         return 60;
     }
-	NSString *title = article.title;
-	CGSize constrant = [ArticleCell constraintForArticle:article];
-	CGSize size = [title sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constrant];
-	return size.height + (CELL_VERTICAL_PADDING * 2) + DATE_CONTENT_HEIGHT;
+    NSString *title = article.title;
+    CGSize constrant = [ArticleCell constraintForArticle:article];
+    CGSize size = [title sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constrant];
+    return size.height + (CELL_VERTICAL_PADDING * 2) + DATE_CONTENT_HEIGHT;
 }
 
 - (UIColor *)dateColor
@@ -90,15 +90,15 @@
 - (void)arrangeTitleFrame
 {
     CGSize constraint = [ArticleCell constraintForArticle:_article];
-	CGSize size = [_titleLabel.text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE]
-				   constrainedToSize:constraint
-					   lineBreakMode:UILineBreakModeWordWrap];
+    CGSize size = [_titleLabel.text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE]
+                               constrainedToSize:constraint
+                                   lineBreakMode:UILineBreakModeWordWrap];
     [_titleLabel setFrame:CGRectMake(
-                                    CELL_LEFT_PADDING,
-                                    DATE_CONTENT_HEIGHT + CELL_VERTICAL_PADDING,
-                                    [ArticleCell widthForArticle:_article],
-                                    size.height
-                                    )];
+        CELL_LEFT_PADDING,
+        DATE_CONTENT_HEIGHT + CELL_VERTICAL_PADDING,
+        [ArticleCell widthForArticle:_article],
+        size.height
+    )];
 }
 
 - (NSDate *)trunc:(NSDate *)d
