@@ -104,16 +104,16 @@
 
 - (void)loadUrl:(NSString *)urlString
 {
-	if (![urlString length]) {
-		return;
-	}
+    if (![urlString length]) {
+        return;
+    }
     FeedExplorer *explorer = [[FeedExplorer alloc] init];
     [explorer setDelegate:self];
     [explorer loadUrl:[NSURL URLWithString:urlString] findLinks:NO];
 }
 
 - (void)cancelUrlEntry {
-	[_urlTextField resignFirstResponder];
+    [_urlTextField resignFirstResponder];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -195,7 +195,7 @@
 - (void)explorerFoundFeedUrls:(NSArray *)a
 {
     _urlTextField.text = a[0];
-	[self loadUrl:a[0]];
+    [self loadUrl:a[0]];
 }
 
 - (void)explorerExploded:(NSString *)e
@@ -240,18 +240,18 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 
 - (IBAction)openCategoriesForm:(id)sender
 {
-	CFolders *root = [[CFolders alloc] initWithNibName:@"CFolders" bundle:nil];
+    CFolders *root = [[CFolders alloc] initWithNibName:@"CFolders" bundle:nil];
     CFoldersClosingCallback cb = ^{
         [categoryButton setTitle:feed.folder.name forState:UIControlStateNormal];
         categoryButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
         categoryButton.titleLabel.textColor = [UIColor blackColor];
         [self dismissModalViewControllerAnimated:YES];
     };
-	[root setCallback:[cb copy]];
-	[root setFeed:feed];
-	UINavigationController *c = [[UINavigationController alloc] initWithRootViewController:root];
+    [root setCallback:[cb copy]];
+    [root setFeed:feed];
+    UINavigationController *c = [[UINavigationController alloc] initWithRootViewController:root];
     c.navigationBar.tintColor = [UIColor blackColor];
-	[self presentModalViewController:c animated:YES];
+    [self presentModalViewController:c animated:YES];
 }
 
 #pragma mark - browser
