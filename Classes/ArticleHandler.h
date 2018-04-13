@@ -19,7 +19,7 @@
     Article *article;
     NSDate *now;
     int itemCounter;
-	NSDateFormatter *dateFormatter, *dateFormatter2;
+    NSDateFormatter *dateFormatter, *dateFormatter2;
     FeedReader *_feedReader;
 }
 
