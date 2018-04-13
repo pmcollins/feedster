@@ -12,7 +12,7 @@
 typedef void (^CFoldersClosingCallback)(void);
 
 @interface CFolders : UIViewController <UITableViewDelegate, UITableViewDataSource> {
-	CFoldersClosingCallback callback;
+    CFoldersClosingCallback callback;
     Folder *_newFolder;
 }
 

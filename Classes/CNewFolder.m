@@ -11,7 +11,7 @@
 #import "M.h"
 
 @interface CNewFolder () {
-	CFolders *_cFolders;
+    CFolders *_cFolders;
     Folder *_folder;
 } @end
 
@@ -30,25 +30,25 @@
 
 - (void)close {
     [_cFolders newFolderCreated:_folder];
-	[self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)save:(id)sender {
-	NSString *name = nameField.text;
-	if ([name length]) {
+    NSString *name = nameField.text;
+    if ([name length]) {
         _folder = [Folder insertFolderWithName:name];
         [[M sharedInstance] saveMainContext];
-	}
-	[self close];
+    }
+    [self close];
 }
 
 - (IBAction)close:(id)sender {
-	[self close];
+    [self close];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-	[nameField resignFirstResponder];
-	return YES;
+    [nameField resignFirstResponder];
+    return YES;
 }
 
 @end

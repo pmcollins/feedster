@@ -11,10 +11,10 @@
 #import "PodcastStatusIconView.h"
 
 @interface FeedCell : UITableViewCell {
-	Feed *feed;
-	UIActivityIndicatorView *activityIndicator;
-	UILabel *feedName, *unreadCount, *lastUpdated;
-	UIImageView *favicon;
+    Feed *feed;
+    UIActivityIndicatorView *activityIndicator;
+    UILabel *feedName, *unreadCount, *lastUpdated;
+    UIImageView *favicon;
     NSArray *statusImages;
 }
 

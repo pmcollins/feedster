@@ -29,9 +29,9 @@
 
 - (NSManagedObjectContext *)newManagedObjectContext
 {
-	NSManagedObjectContext *ctx = [NSManagedObjectContext new];
+    NSManagedObjectContext *ctx = [NSManagedObjectContext new];
     [ctx setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
-	[ctx setPersistentStoreCoordinator:[self persistentStoreCoordinator]];
+    [ctx setPersistentStoreCoordinator:[self persistentStoreCoordinator]];
     return ctx;
 }
 
@@ -47,24 +47,24 @@
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
     if (persistentStoreCoordinator == nil) {
-		NSURL *storeUrl =
-			[NSURL fileURLWithPath:[[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
-									stringByAppendingPathComponent:@"model.sqlite"]];
-		NSError *error = nil;
-		persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-		[persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+        NSURL *storeUrl =
+            [NSURL fileURLWithPath:[[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
+                                    stringByAppendingPathComponent:@"model.sqlite"]];
+        NSError *error = nil;
+        persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+        [persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
                                                  configuration:nil
                                                            URL:storeUrl
                                                        options:nil
                                                          error:&error];
     }
-	return persistentStoreCoordinator;
+    return persistentStoreCoordinator;
 }
 
 - (NSManagedObjectModel *)managedObjectModel
 {
     if (managedObjectModel == nil) {
-		managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];    
+        managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
     }
     return managedObjectModel;
 }
@@ -103,12 +103,12 @@
 
 - (BOOL)saveMainContext
 {
-	return [self saveContext:[self mainManagedObjectContext]];
+    return [self saveContext:[self mainManagedObjectContext]];
 }
 
 - (BOOL)save:(NSManagedObject *)o
 {
-	return [self saveContext:[o managedObjectContext]];
+    return [self saveContext:[o managedObjectContext]];
 }
 
 - (id)insert:(NSString *)name

@@ -21,10 +21,10 @@
 
 @interface CArticle() {
     Article *_article;
-	NSArray *_articles, *_defaultItems;
-	NSUInteger _feedIndex, _itemCount;
-	NSUInteger _itemsToLoad, _itemsLoaded;
-	UISegmentedControl *_prevNextControl, *_fwdBackControl;
+    NSArray *_articles, *_defaultItems;
+    NSUInteger _feedIndex, _itemCount;
+    NSUInteger _itemsToLoad, _itemsLoaded;
+    UISegmentedControl *_prevNextControl, *_fwdBackControl;
     UIActionSheet *_actionSheet;
     Player *_player;
     BOOL _loadWebViewOnDemand;
@@ -58,16 +58,16 @@
 
     [self.view addSubview:_summary];
     
-	_itemsToLoad = _itemsLoaded = 0;
-	_itemCount = [_articles count];
+    _itemsToLoad = _itemsLoaded = 0;
+    _itemCount = [_articles count];
 
     _player = [Player sharedInstance];
     
     [self showPlayerButton];
 
-	[self setupDynamicContent];
+    [self setupDynamicContent];
     
-	[_tabBar addTarget:self action:@selector(showTab:) forControlEvents:UIControlEventValueChanged];
+    [_tabBar addTarget:self action:@selector(showTab:) forControlEvents:UIControlEventValueChanged];
     _loadWebViewOnDemand = NO;
 }
 
@@ -130,11 +130,11 @@
     titleView.text = _article.title;
     self.navigationItem.titleView = titleView;
     
-	_summary.titleLabel.text = _article.title;
-	if ([_article.unread boolValue]) {
-		_article.unread = @NO;
-		[[M sharedInstance] saveMainContext];
-	}
+    _summary.titleLabel.text = _article.title;
+    if ([_article.unread boolValue]) {
+        _article.unread = @NO;
+        [[M sharedInstance] saveMainContext];
+    }
     NSString *htmlBody = _article.body;
     if (htmlBody == nil || htmlBody.length == 0) {
         [_summary resizeForPortraitMini];
@@ -155,9 +155,9 @@
         [_webView loadHTMLString:@"<html><body style=\"background-color:black\"><i>No link</i></body></html>" baseURL:nil];
         _progressBar.hidden = YES;
     }
-	if (_defaultItems == nil) {
-		_defaultItems = _toolBar.items;
-	}
+    if (_defaultItems == nil) {
+        _defaultItems = _toolBar.items;
+    }
 }
 
 #pragma mark - Media Play/Download
@@ -316,46 +316,46 @@
 
 - (void)showTab:(id)sender
 {
-	UISegmentedControl *c = sender;
-	if (c.selectedSegmentIndex == 0) {
-		_webView.hidden = YES;
-	} else {
-		if (_loadWebViewOnDemand && _article.link) {
-			[_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_article.link]]];
+    UISegmentedControl *c = sender;
+    if (c.selectedSegmentIndex == 0) {
+        _webView.hidden = YES;
+    } else {
+        if (_loadWebViewOnDemand && _article.link) {
+            [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_article.link]]];
             _loadWebViewOnDemand = NO;
-		}
-		_webView.hidden = NO;
-	}
+        }
+        _webView.hidden = NO;
+    }
 }
 
 - (void)resetTabBar
 {
-//	tabBar.selectedSegmentIndex = 0;
-//	webView.hidden = YES;
-//	bodyViewContainer.hidden = NO;
+//    tabBar.selectedSegmentIndex = 0;
+//    webView.hidden = YES;
+//    bodyViewContainer.hidden = NO;
 }
 
 //prev next
 - (void)segAction:(id)sender
 {
-	UISegmentedControl *c = sender;
-	if (c.selectedSegmentIndex) {
-		if (_feedIndex < [_articles count]-1) {
-			_article = _articles[++_feedIndex];
-		} else {
-			return;
-		}
-	} else {
-		if (_feedIndex > 0) {
-			_article = _articles[--_feedIndex];
-		} else {
-			return;
-		}
-	}
-	[self resetTabBar];
-	[self resetLoadingProgress];
-	[_webView stopLoading];
-	[self setupDynamicContent];
+    UISegmentedControl *c = sender;
+    if (c.selectedSegmentIndex) {
+        if (_feedIndex < [_articles count]-1) {
+            _article = _articles[++_feedIndex];
+        } else {
+            return;
+        }
+    } else {
+        if (_feedIndex > 0) {
+            _article = _articles[--_feedIndex];
+        } else {
+            return;
+        }
+    }
+    [self resetTabBar];
+    [self resetLoadingProgress];
+    [_webView stopLoading];
+    [self setupDynamicContent];
 }
 
 - (IBAction)actionButtonTouched:(id)stuff {
@@ -374,17 +374,17 @@
 
 - (void)setArticles:(NSArray *)article index:(NSUInteger)index
 {
-	_articles = article;
-	_feedIndex = index;
-	_article = article[index];
+    _articles = article;
+    _feedIndex = index;
+    _article = article[index];
 }
 
 - (IBAction)curlPage
 {
-	CArticleDetail *cItemDetail = [[CArticleDetail alloc] initWithNibName:@"CArticleDetail" bundle:nil];
-	cItemDetail.modalTransitionStyle = UIModalTransitionStylePartialCurl;
-	[cItemDetail setArticle:_article];
-	[self presentModalViewController:cItemDetail animated:YES];
+    CArticleDetail *cItemDetail = [[CArticleDetail alloc] initWithNibName:@"CArticleDetail" bundle:nil];
+    cItemDetail.modalTransitionStyle = UIModalTransitionStylePartialCurl;
+    [cItemDetail setArticle:_article];
+    [self presentModalViewController:cItemDetail animated:YES];
 }
 
 - (IBAction)trash:(id)sender
@@ -393,8 +393,8 @@
 
 - (void)resetLoadingProgress
 {
-	[self stopAnimating];
-	_itemsLoaded = _itemsToLoad = 0;
+    [self stopAnimating];
+    _itemsLoaded = _itemsToLoad = 0;
 }
 
 #pragma mark - PlaybackPanel
@@ -474,10 +474,10 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-	if (_itemsToLoad == 0) {
+    if (_itemsToLoad == 0) {
         [self showProgressBar];
-		[self startAnimating];
-	}
+        [self startAnimating];
+    }
     _itemsToLoad++;
     
     [self updateProgressBar];
@@ -485,24 +485,24 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
 
 - (void)incrementLoadedItems
 {
-	_itemsLoaded++;
+    _itemsLoaded++;
     [self updateProgressBar];
-	if (_itemsLoaded == _itemsToLoad) {
-		[self stopAnimating];
+    if (_itemsLoaded == _itemsToLoad) {
+        [self stopAnimating];
         [self hideProgressBar];
         [self updateWebNavButtons];
         [_summary showCloseButton];
-	}
+    }
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-	[self incrementLoadedItems];
+    [self incrementLoadedItems];
 }
 
 - (void)webView:(UIWebView *)wv didFailLoadWithError:(NSError *)error
 {
-	[self incrementLoadedItems];
+    [self incrementLoadedItems];
     if (error.code == 204) {
         [wv stopLoading];
         [wv loadHTMLString:@"<html><body style='background-color:black'></body></html>" baseURL:[[NSBundle mainBundle] resourceURL]];

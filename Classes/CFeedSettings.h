@@ -12,8 +12,8 @@
 #import "TableViewData.h"
 
 @interface CFeedSettings : UIViewController <UITextFieldDelegate> {
-	Feed *feed;
-	CArticleTable *articleTable;
+    Feed *feed;
+    CArticleTable *articleTable;
     UITextField *nameField;
 }
 

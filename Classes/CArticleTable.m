@@ -29,8 +29,8 @@
     Feed *_feed;
     NSMutableArray *_newArticles;
     NSMutableArray *_prevArticles;
-	CFeedList *_cFeedList;
-	ArticleTitleView *_titleView;
+    CFeedList *_cFeedList;
+    ArticleTitleView *_titleView;
     Player *_player;
     FFBadge *_badge;
     NSUInteger _prevItemCount;
@@ -148,7 +148,7 @@
 
 - (void)dealloc
 {
-	self.navigationItem.titleView = nil;
+    self.navigationItem.titleView = nil;
 }
 
 #pragma mark - Activity Indicator Management
@@ -167,21 +167,21 @@
 
 - (void)handleRefresh:(id)thing
 {
-	[[UpdateQueue sharedInstance] enqueueFeed:_feed];
+    [[UpdateQueue sharedInstance] enqueueFeed:_feed];
     [[UpdateQueue sharedInstance] checkForUpdatesAndStartNewThread];
-	[self startActivityIndicator];
+    [self startActivityIndicator];
     [_refreshControl performSelector:@selector(endRefreshing) withObject:nil afterDelay:0.5];
 }
 
 - (IBAction)showSettings
 {
-	CFeedSettings *f = [[CFeedSettings alloc] initWithNibName:@"CFeedSettings" bundle:nil];
-	[f setFeed:_feed];
-	[f setOpener:self];
-	UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:f];
+    CFeedSettings *f = [[CFeedSettings alloc] initWithNibName:@"CFeedSettings" bundle:nil];
+    [f setFeed:_feed];
+    [f setOpener:self];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:f];
     nav.navigationBar.tintColor = [UIColor blackColor];
-	nav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-	[self presentModalViewController:nav animated:YES];
+    nav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentModalViewController:nav animated:YES];
 }
 
 - (IBAction)fastForward:(id)sender
@@ -203,13 +203,13 @@
 
 - (IBAction)showMarkAsReadDialog
 {
-	UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil
-													   delegate:self
-											  cancelButtonTitle:@"Cancel"
-										 destructiveButtonTitle:@"Mark all as Read"
-											  otherButtonTitles:@"Mark all as Unread", nil];
-	sheet.tag = 1;
-	[sheet showInView:self.view];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                         destructiveButtonTitle:@"Mark all as Read"
+                                              otherButtonTitles:@"Mark all as Unread", nil];
+    sheet.tag = 1;
+    [sheet showInView:self.view];
 }
 
 - (IBAction)trash
@@ -219,7 +219,7 @@
                                           cancelButtonTitle:@"Cancel"
                                      destructiveButtonTitle:@"Delete All"
                                           otherButtonTitles:@"Delete Read", nil];
-	as.tag = 0;
+    as.tag = 0;
     [as showInView:self.tableView];
 }
 
@@ -260,26 +260,26 @@
 
 - (void)handleMarkAsReadActionSheet:(NSInteger)buttonIndex
 {
-	if (buttonIndex == 0) {
-		[_feed markAllAsRead];
-	} else if (buttonIndex == 1) {
-		[_feed markAllAsUnread];
-	}
-	[self.tableView reloadData];
+    if (buttonIndex == 0) {
+        [_feed markAllAsRead];
+    } else if (buttonIndex == 1) {
+        [_feed markAllAsUnread];
+    }
+    [self.tableView reloadData];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	switch (actionSheet.tag) {
-		case 0:
-			[self handleTrashActionSheet:buttonIndex];
-			break;
-		case 1:
-			[self handleMarkAsReadActionSheet:buttonIndex];
-			break;
-		default:
-			break;
-	}
+    switch (actionSheet.tag) {
+        case 0:
+            [self handleTrashActionSheet:buttonIndex];
+            break;
+        case 1:
+            [self handleMarkAsReadActionSheet:buttonIndex];
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark -
@@ -346,18 +346,18 @@
 
 - (void)setCFeedList:(CFeedList *)f
 {
-	_cFeedList = f;
+    _cFeedList = f;
 }
 
 - (void)setFeed:(Feed *)f
 {
     _feed = f;
-	self.navigationItem.titleView = _titleView = [[ArticleTitleView alloc] initWithFrame:CGRectMake(0, 0, 190, 32)];
-	self.title = _titleView.titleLabel.text = _feed.title;
+    self.navigationItem.titleView = _titleView = [[ArticleTitleView alloc] initWithFrame:CGRectMake(0, 0, 190, 32)];
+    self.title = _titleView.titleLabel.text = _feed.title;
 
     [self setSubtitle];
     
-	_titleView.faviconView.image = _feed.faviconImage;
+    _titleView.faviconView.image = _feed.faviconImage;
 }
 
 - (void)setFeedsAsSeen
@@ -368,7 +368,7 @@
 
 - (void)loadArticles
 {
-	[[[M sharedInstance] mainManagedObjectContext] refreshObject:_feed mergeChanges:NO];
+    [[[M sharedInstance] mainManagedObjectContext] refreshObject:_feed mergeChanges:NO];
     _newArticles = [NSMutableArray arrayWithArray:[_feed newArticles]];
     _prevArticles = [NSMutableArray arrayWithArray:[_feed previousArticles:_prevItemCount]];
 }
@@ -521,7 +521,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	Article *article = [self articleAtIndexPath:indexPath];
+    Article *article = [self articleAtIndexPath:indexPath];
     
     if (article == nil) {
         _prevItemCount += 30;
@@ -537,8 +537,8 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	Article *article = [self articleAtIndexPath:indexPath];
-	return [ArticleCell heightForArticle:article];
+    Article *article = [self articleAtIndexPath:indexPath];
+    return [ArticleCell heightForArticle:article];
 }
 
 #pragma mark - stuff

@@ -23,7 +23,7 @@
 #import "XReaderAppDelegate.h"
 
 @interface CFeedList() {
-	NSDictionary *_feedsInFolders;
+    NSDictionary *_feedsInFolders;
     NSArray *_folders;
     NSMutableDictionary *_podcastStatusFetcherMap;
     FFBadge *_badge;
@@ -247,7 +247,7 @@
 
 - (void)reloadRowForFeed:(Feed *)f
 {
-	[self.tableView reloadData];
+    [self.tableView reloadData];
 }
 
 - (void)setUpFFBadge
@@ -267,7 +267,7 @@
 {
     Feed *f = [Feed firstFeedWithUnreadItems];
     CArticleTable *articleTable = [[CArticleTable alloc] initWithNibName:@"CArticleTable" bundle:nil];
-	[articleTable setCFeedList:self];
+    [articleTable setCFeedList:self];
     [articleTable setFeed:f];
     [self.navigationController pushViewController:articleTable animated:YES];
 
@@ -275,12 +275,12 @@
 
 - (FeedCell *)visibleCellForFeedId:(NSManagedObjectID *)fid
 {
-	for (FeedCell *cell in [self.tableView visibleCells]) {
-		if ([cell.feed.objectID isEqual:fid]) {
-			return cell;
-		}
-	}
-	return nil;
+    for (FeedCell *cell in [self.tableView visibleCells]) {
+        if ([cell.feed.objectID isEqual:fid]) {
+            return cell;
+        }
+    }
+    return nil;
 }
 
 - (NSArray *)feedsInSection:(NSInteger)section
@@ -291,8 +291,8 @@
 
 - (Feed *)feedAtIndexPath:(NSIndexPath *)ip
 {
-	NSArray *feeds = [self feedsInSection:[ip section]];
-	return feeds[[ip row]];
+    NSArray *feeds = [self feedsInSection:[ip section]];
+    return feeds[[ip row]];
 }
 
 - (NSIndexPath *)indexPathForFeed:(Feed *)feed
@@ -319,7 +319,7 @@
 - (NSString *)tableView:(UITableView *)tableView
 titleForHeaderInSection:(NSInteger)section
 {
-	id<NSCopying> thing = _folders[section];
+    id<NSCopying> thing = _folders[section];
     if (thing == [NSNull null]) {
         return @"Uncategorized";
     }
@@ -345,9 +345,9 @@ titleForHeaderInSection:(NSInteger)section
         [cell setup];
         self.tmpCell = nil;
     }
-	Feed *feed = [self feedAtIndexPath:indexPath];
-	cell.feed = feed;
-	[cell render];
+    Feed *feed = [self feedAtIndexPath:indexPath];
+    cell.feed = feed;
+    [cell render];
     if ([[UpdateQueue sharedInstance] isFeedUpdating:feed]) {
         [cell startAnimating];
     } else if ([[UpdateQueue sharedInstance] isFeedQueued:feed]) {
@@ -374,7 +374,7 @@ titleForHeaderInSection:(NSInteger)section
     [cell setPodcastStatus:status];
     [cell setRefreshPeriod:calculatedRefreshPeriod];
 
-	return cell;
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tv
@@ -382,7 +382,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-		Feed *f = [self feedAtIndexPath:indexPath];
+        Feed *f = [self feedAtIndexPath:indexPath];
         
         NSManagedObjectID *aid = [[Player sharedInstance] articleIdPlaying];
         if (aid) {
@@ -422,15 +422,15 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 - (void)setEditing:(BOOL)editing
           animated:(BOOL)animated
 {
-	[super setEditing:editing animated:animated];
-	[self.tableView setEditing:editing animated:animated];
+    [super setEditing:editing animated:animated];
+    [self.tableView setEditing:editing animated:animated];
 }
 
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CArticleTable *articleTable = [[CArticleTable alloc] initWithNibName:@"CArticleTable" bundle:nil];
-	[articleTable setCFeedList:self];
+    [articleTable setCFeedList:self];
     [articleTable setFeed:[self feedAtIndexPath:indexPath]];
     [self.navigationController pushViewController:articleTable animated:YES];
 }

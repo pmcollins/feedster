@@ -12,21 +12,21 @@
 
 - (id)initWithDictionary:(NSDictionary *)dict {
     self = [super init];
-	propertyDict = dict;
+    propertyDict = dict;
     return self;
 }
 
 - (id)initWithAttributeName:(NSString *)n property:(NSString *)p {
     self = [super init];
-	propertyDict = @{n: p};
+    propertyDict = @{n: p};
     return self;
 }
 
 - (void)tagStartedWithAttributes:(NSDictionary *)tagAttributes {
-	[propertyDict enumerateKeysAndObjectsUsingBlock:^(id attributeName, id property, BOOL *stop) {
-		NSString *value = tagAttributes[attributeName];
-		[propertyValueDelegate handlerFoundValue:value forName:attributeName property:property];
-	}];
+    [propertyDict enumerateKeysAndObjectsUsingBlock:^(id attributeName, id property, BOOL *stop) {
+        NSString *value = tagAttributes[attributeName];
+        [propertyValueDelegate handlerFoundValue:value forName:attributeName property:property];
+    }];
 }
 
 @end

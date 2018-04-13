@@ -40,11 +40,11 @@
     NSEntityDescription *d = [NSEntityDescription entityForName:@"Feed" inManagedObjectContext:ctx];
     NSFetchRequest *req = [[NSFetchRequest alloc] init];
     [req setEntity:d];
-	if (sorted) {
-		NSSortDescriptor *folderSort = [[NSSortDescriptor alloc] initWithKey:@"folder.name" ascending:YES];
-		NSSortDescriptor *titleSort = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
-		[req setSortDescriptors:@[folderSort, titleSort]];
-	}
+    if (sorted) {
+        NSSortDescriptor *folderSort = [[NSSortDescriptor alloc] initWithKey:@"folder.name" ascending:YES];
+        NSSortDescriptor *titleSort = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
+        [req setSortDescriptors:@[folderSort, titleSort]];
+    }
     NSError *e;
 
     return [ctx executeFetchRequest:req error:&e];
@@ -63,11 +63,11 @@
 }
 
 + (NSArray *)orderedFeeds {
-	return [Feed selectFeeds:YES];
+    return [Feed selectFeeds:YES];
 }
 
 + (NSArray *)unorderedFeeds {
-	return [Feed selectFeeds:NO];
+    return [Feed selectFeeds:NO];
 }
 
 + (void)setArticlesAsSeen:(NSArray *)articles
@@ -325,11 +325,11 @@
     NSEntityDescription *d = [NSEntityDescription entityForName:@"Article" inManagedObjectContext:ctx];
     NSFetchRequest *req = [[NSFetchRequest alloc] init];
     [req setEntity:d];
-	NSPredicate *p;
+    NSPredicate *p;
     NSString *fmt = [NSString stringWithFormat:@"(feed == %%@) AND (deleted == 0) %@", predicates];
     p = [NSPredicate predicateWithFormat:fmt, self];
     [req setPredicate:p];
-	return req;
+    return req;
 }
 
 - (NSUInteger)activeItemCount:(NSString *)predicates {
@@ -347,11 +347,11 @@
 }
 
 - (NSUInteger)itemCount {
-	return [self activeItemCount:@""];
+    return [self activeItemCount:@""];
 }
 
 - (NSUInteger)unreadItemCount {
-	return [self activeItemCount:@"AND (unread == 1)"];
+    return [self activeItemCount:@"AND (unread == 1)"];
 }
 
 - (void)deleteAllItems {
@@ -410,45 +410,45 @@
 }
 
 - (void)markAllAsRead {
-	for (Article *article in [self activeItems:@"AND (unread == 1)"]) {
-		article.unread = @(NO);
-	}
-	[[M sharedInstance] saveMainContext];
+    for (Article *article in [self activeItems:@"AND (unread == 1)"]) {
+        article.unread = @(NO);
+    }
+    [[M sharedInstance] saveMainContext];
 }
 
 - (void)markAllAsUnread {
-	for (Article *article in [self activeItems:@"AND (unread == 0)"]) {
-		article.unread = @(YES);
-	}
-	[[M sharedInstance] saveMainContext];
+    for (Article *article in [self activeItems:@"AND (unread == 0)"]) {
+        article.unread = @(YES);
+    }
+    [[M sharedInstance] saveMainContext];
 }
 
 - (NSString *)updatedAgo {
-	NSDate *d = self.lastUpdated;
-	if (d) {
-		NSString *out;
-		int minutes = -round([d timeIntervalSinceNow] / 60);
-		if (minutes <= 1) {
-			out = @"Updated just now";
-		} else if (minutes <= 90) {
-			out = [NSString stringWithFormat:@"Updated %d minutes ago", minutes];
-		} else {
-			int hours = round(minutes / 60);
-			if (hours <= 48) {
-				out = [NSString stringWithFormat:@"Updated %d hours ago", hours];
-			} else {
-				int days = round(hours / 24);
-				out = [NSString stringWithFormat:@"Updated %d days ago", days];
-			}
-		}
-		return out;
-	} else {
-		return @"";
-	}
+    NSDate *d = self.lastUpdated;
+    if (d) {
+        NSString *out;
+        int minutes = -round([d timeIntervalSinceNow] / 60);
+        if (minutes <= 1) {
+            out = @"Updated just now";
+        } else if (minutes <= 90) {
+            out = [NSString stringWithFormat:@"Updated %d minutes ago", minutes];
+        } else {
+            int hours = round(minutes / 60);
+            if (hours <= 48) {
+                out = [NSString stringWithFormat:@"Updated %d hours ago", hours];
+            } else {
+                int days = round(hours / 24);
+                out = [NSString stringWithFormat:@"Updated %d days ago", days];
+            }
+        }
+        return out;
+    } else {
+        return @"";
+    }
 }
 
 - (UIImage *)faviconImage {
-	return self.favicon ? [UIImage imageWithData:self.favicon] : [UIImage imageNamed:@"feed-color.png"];
+    return self.favicon ? [UIImage imageWithData:self.favicon] : [UIImage imageNamed:@"feed-color.png"];
 }
 
 - (NSArray *)getRecentPodcastsStatus:(NSManagedObjectContext *)ctx

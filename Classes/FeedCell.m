@@ -38,12 +38,12 @@
     favicon.hidden = YES;
     activityIndicator.hidden = NO;
     self.queuedImg.hidden = YES;
-	[activityIndicator startAnimating];
+    [activityIndicator startAnimating];
 }
 
 - (void)stopAnimating
 {
-	[activityIndicator stopAnimating];
+    [activityIndicator stopAnimating];
     activityIndicator.hidden = YES;
     favicon.hidden = NO;
 }
@@ -77,8 +77,8 @@
         self.unreadCount.hidden = NO;
         self.unreadCount.text = [NSString stringWithFormat:@"%i", new];
     }
-	self.feedName.text = feed.title;
-	favicon.image = feed.faviconImage;
+    self.feedName.text = feed.title;
+    favicon.image = feed.faviconImage;
     
     self.activityIndicator.hidden = YES;
     self.queuedImg.hidden = YES;

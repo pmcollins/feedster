@@ -20,8 +20,8 @@
 
 - (void)viewDidLoad
 {
-	self.title = feed.title;
-	self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.title = feed.title;
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
     if (feed) {
         tableView.allowsSelection = YES;
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
@@ -33,8 +33,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     self.navigationItem.title = @"Feed Categories";
-	[self loadData];
-	[tableView reloadData];
+    [self loadData];
+    [tableView reloadData];
     [super viewWillAppear:animated];
 }
 
@@ -63,13 +63,13 @@
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
-	[super setEditing:editing animated:animated];
-	[tableView setEditing:editing animated:animated];
+    [super setEditing:editing animated:animated];
+    [tableView setEditing:editing animated:animated];
 }
 
 - (void)loadData
 {
-	self.folders = [Folder orderedFolders];
+    self.folders = [Folder orderedFolders];
 }
 
 - (IBAction)editTouched:(id)sender
@@ -81,21 +81,21 @@
 
 - (void)dismissModalViewControllerAnimated:(BOOL)animated
 {
-	[self loadData];
-	[tableView reloadData];
-	[super dismissModalViewControllerAnimated:animated];
+    [self loadData];
+    [tableView reloadData];
+    [super dismissModalViewControllerAnimated:animated];
 }
 
 #pragma mark - Table Datasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return [folders count];
+    return [folders count];
 }
 
 - (Folder *)folderAtIndexPath:(NSIndexPath *)ip
 {
-	return folders[[ip row]];
+    return folders[[ip row]];
 }
     
 - (UITableViewCell *)tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -106,9 +106,9 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                        reuseIdentifier:CellIdentifier];
     }
-	Folder *folder = [self folderAtIndexPath:indexPath];
-	cell.accessoryType = [feed.folder isEqual:folder] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
-	cell.textLabel.text = folder.name;
+    Folder *folder = [self folderAtIndexPath:indexPath];
+    cell.accessoryType = [feed.folder isEqual:folder] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+    cell.textLabel.text = folder.name;
     cell.showsReorderControl = YES;
     return cell;
 }
@@ -131,11 +131,11 @@
     if (!feed) {
         return;
     }
-	Folder *f = [self folderAtIndexPath:indexPath];
-	feed.folder = f;
- 	[[M sharedInstance] saveMainContext];
-	[tv reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-	[self close:nil];
+    Folder *f = [self folderAtIndexPath:indexPath];
+    feed.folder = f;
+     [[M sharedInstance] saveMainContext];
+    [tv reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    [self close:nil];
 }
 
 - (void)tableView:(UITableView *)tv
@@ -143,7 +143,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-		Folder *f = [self folderAtIndexPath:indexPath];
+        Folder *f = [self folderAtIndexPath:indexPath];
         if ([f numberOfFeeds]) {
             UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"That category has feeds in it"
                                                          message:nil
@@ -217,9 +217,9 @@ targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 
 - (IBAction)newFolder:(id)sender
 {
-	CNewFolder *f = [[CNewFolder alloc] initWithNibName:@"CNewFolder" bundle:nil];
+    CNewFolder *f = [[CNewFolder alloc] initWithNibName:@"CNewFolder" bundle:nil];
     [f setCFolders:self];
-	[self.navigationController pushViewController:f animated:YES];
+    [self.navigationController pushViewController:f animated:YES];
 }
 
 @end

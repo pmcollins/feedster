@@ -23,7 +23,7 @@
 
 - (void)setOpener:(CArticleTable *)opener
 {
-	articleTable = opener;
+    articleTable = opener;
 }
 
 - (void)saveTitle
@@ -36,20 +36,20 @@
 - (void)done
 {
     [self saveTitle];
-	[articleTable dismissModalViewControllerAnimated:YES];
+    [articleTable dismissModalViewControllerAnimated:YES];
 }
 
 - (void)setFeed:(Feed *)f
 {
-	feed = f;
+    feed = f;
 }
 
 #pragma mark - LifeCycle
 
 - (void)viewDidLoad
 {
-	self.title = @"Feed Settings";
-	self.navigationItem.rightBarButtonItem =
+    self.title = @"Feed Settings";
+    self.navigationItem.rightBarButtonItem =
         [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                        target:self
                                                        action:@selector(done)];
@@ -71,26 +71,26 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-	if (textField.tag == NAME_TEXTFIELD) {
+    if (textField.tag == NAME_TEXTFIELD) {
         [self saveTitle];
-		[textField resignFirstResponder];
-	}
-	return YES;
+        [textField resignFirstResponder];
+    }
+    return YES;
 }
 
 #pragma mark - Stuff
 
 - (IBAction)openCategoriesForm:(id)sender
 {
-	CFolders *root = [[CFolders alloc] initWithNibName:@"CFolders" bundle:nil];
+    CFolders *root = [[CFolders alloc] initWithNibName:@"CFolders" bundle:nil];
     CFoldersClosingCallback cb = ^{
         [self dismissModalViewControllerAnimated:YES];
     };
-	[root setCallback:[cb copy]];
-	[root setFeed:feed];
-	UINavigationController *c = [[UINavigationController alloc] initWithRootViewController:root];
+    [root setCallback:[cb copy]];
+    [root setFeed:feed];
+    UINavigationController *c = [[UINavigationController alloc] initWithRootViewController:root];
     c.navigationBar.tintColor = [UIColor blackColor];
-	[self presentModalViewController:c animated:YES];
+    [self presentModalViewController:c animated:YES];
 }
 
 - (IBAction)openPeriodSelector:(id)sender

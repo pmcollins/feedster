@@ -27,8 +27,8 @@
     NSEntityDescription *d = [NSEntityDescription entityForName:@"Folder" inManagedObjectContext:ctx];
     NSFetchRequest *req = [[NSFetchRequest alloc] init];
     [req setEntity:d];
-	NSSortDescriptor *titleSort = [[NSSortDescriptor alloc] initWithKey:@"orderValue" ascending:NO];
-	[req setSortDescriptors:@[titleSort]];
+    NSSortDescriptor *titleSort = [[NSSortDescriptor alloc] initWithKey:@"orderValue" ascending:NO];
+    [req setSortDescriptors:@[titleSort]];
     NSArray *a = [ctx executeFetchRequest:req error:nil];
     if ([a count]) {
         Folder *f = a[0];
@@ -58,8 +58,8 @@
     NSEntityDescription *d = [NSEntityDescription entityForName:@"Folder" inManagedObjectContext:ctx];
     NSFetchRequest *req = [[NSFetchRequest alloc] init];
     [req setEntity:d];
-	NSSortDescriptor *titleSort = [[NSSortDescriptor alloc] initWithKey:@"orderValue" ascending:YES];
-	[req setSortDescriptors:@[titleSort]];
+    NSSortDescriptor *titleSort = [[NSSortDescriptor alloc] initWithKey:@"orderValue" ascending:YES];
+    [req setSortDescriptors:@[titleSort]];
     NSError *e;
     NSArray *out = [ctx executeFetchRequest:req error:&e];
     return out;
@@ -67,13 +67,13 @@
 
 + (NSArray *)feedsForFolder:(Folder *)f
 {
-	NSManagedObjectContext *ctx = [[M sharedInstance] mainManagedObjectContext];
+    NSManagedObjectContext *ctx = [[M sharedInstance] mainManagedObjectContext];
     NSEntityDescription *d = [NSEntityDescription entityForName:@"Feed" inManagedObjectContext:ctx];
     NSFetchRequest *req = [[NSFetchRequest alloc] init];
     [req setEntity:d];
-	[req setPredicate:[NSPredicate predicateWithFormat:@"folder == %@", f]];
-	NSSortDescriptor *titleSort = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
-	[req setSortDescriptors:@[titleSort]];
+    [req setPredicate:[NSPredicate predicateWithFormat:@"folder == %@", f]];
+    NSSortDescriptor *titleSort = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
+    [req setSortDescriptors:@[titleSort]];
     NSError *e;
     NSArray *out = [ctx executeFetchRequest:req error:&e];
     return out;
@@ -81,30 +81,30 @@
 
 + (NSArray *)unclassifiedFeeds
 {
-	return [Folder feedsForFolder:nil];
+    return [Folder feedsForFolder:nil];
 }
 
 - (NSArray *)orderedFeeds
 {
-	return [Folder feedsForFolder:self];
+    return [Folder feedsForFolder:self];
 }
 
 - (NSUInteger)unreadCount
 {
-	__block NSUInteger out = 0;
-	[self.feeds enumerateObjectsUsingBlock:^(id feed, BOOL *stop) {
-		out += [feed unreadItemCount];
-	}];
-	return out;
+    __block NSUInteger out = 0;
+    [self.feeds enumerateObjectsUsingBlock:^(id feed, BOOL *stop) {
+        out += [feed unreadItemCount];
+    }];
+    return out;
 }
 
 - (NSUInteger)numberOfFeeds
 {
-	NSManagedObjectContext *ctx = [[M sharedInstance] mainManagedObjectContext];
+    NSManagedObjectContext *ctx = [[M sharedInstance] mainManagedObjectContext];
     NSEntityDescription *d = [NSEntityDescription entityForName:@"Feed" inManagedObjectContext:ctx];
     NSFetchRequest *req = [[NSFetchRequest alloc] init];
     [req setEntity:d];
-	[req setPredicate:[NSPredicate predicateWithFormat:@"folder == %@", self]];
+    [req setPredicate:[NSPredicate predicateWithFormat:@"folder == %@", self]];
     return [ctx countForFetchRequest:req error:nil];
 }
 

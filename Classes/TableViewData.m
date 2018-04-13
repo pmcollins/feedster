@@ -12,42 +12,42 @@
 @implementation TableViewData
 
 - (id)init {
-	self = [super init];
-	sections = [[NSMutableArray alloc] init];
-	return self;
+    self = [super init];
+    sections = [[NSMutableArray alloc] init];
+    return self;
 }
 
 - (void)addSection:(TableViewSection *)s {
-	[sections addObject:s];
+    [sections addObject:s];
 }
 
 - (NSInteger)sectionCount {
-	return [sections count];
+    return [sections count];
 }
 
 - (NSString *)titleForSection:(NSInteger)section {
-	TableViewSection *s = sections[section];
-	return s.title;
+    TableViewSection *s = sections[section];
+    return s.title;
 }
 
 - (NSString *)footerForSection:(NSInteger)section {
-	TableViewSection *s = sections[section];
-	return s.footerTitle;
+    TableViewSection *s = sections[section];
+    return s.footerTitle;
 }
 
 - (NSInteger)rowsInSection:(NSInteger)section {
-	TableViewSection *s = [self section:section];
-	return [s rowCount];
+    TableViewSection *s = [self section:section];
+    return [s rowCount];
 }
 
 - (TableViewSection *)section:(NSInteger)section {
-	 return sections[section];
+     return sections[section];
 }
 
 - (TableViewRow *)rowAtIndexPath:(NSIndexPath *)indexPath
 {
-	TableViewSection *s = [self section:[indexPath section]];
-	return [s rowAtIndex:[indexPath row]];
+    TableViewSection *s = [self section:[indexPath section]];
+    return [s rowAtIndex:[indexPath row]];
 }
 
 

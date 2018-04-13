@@ -33,7 +33,7 @@
 
     itemCounter = 0;
 
-	[self setDateFormat];
+    [self setDateFormat];
 
     return self;
 }
@@ -55,15 +55,15 @@
 }
 
 - (void)tagEnded {
-	if (article.guid == nil) {
-		article.guid = article.link;
+    if (article.guid == nil) {
+        article.guid = article.link;
         if (article.guid == nil) {
             article.guid = article.mediaUrl;
         }
         if (article.guid == nil) {
             article.guid = [NSString stringWithFormat:@"%@%@%@", [_feedReader feed].title, article.title, article.pubDateStr];
         }
-	}
+    }
     
     NSString *pubDateStr = article.pubDateStr;
     article.pubDate = [dateFormatter dateFromString:pubDateStr];

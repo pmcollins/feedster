@@ -10,10 +10,10 @@
 #import "Article.h"
 
 @interface CArticleDetail : UIViewController {
-	UITextView *textView;
-	UILabel *label;
-	UITextField *textField;
-	Article *_article;
+    UITextView *textView;
+    UILabel *label;
+    UITextField *textField;
+    Article *_article;
 }
 
 @property (nonatomic, strong) IBOutlet UITextView *textView;

@@ -204,24 +204,24 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return [_tableData sectionCount];
+    return [_tableData sectionCount];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	return [_tableData titleForSection:section];
+    return [_tableData titleForSection:section];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-	return [_tableData footerForSection:section];
+    return [_tableData footerForSection:section];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return [_tableData rowsInSection:section];
+    return [_tableData rowsInSection:section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TableViewRow *row = [_tableData rowAtIndexPath:indexPath];
-	return row.cellMaker();
+    return row.cellMaker();
 }
 
 #pragma mark - UITableViewDelegate

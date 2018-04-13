@@ -28,7 +28,7 @@
 
 - (id)initWithArticleId:(NSManagedObjectID *)fiId allowCellular:(BOOL)allowCellular
 {
-	self = [super init];
+    self = [super init];
     _articleId = fiId;
     _ctx = [[M sharedInstance] newManagedObjectContext];
     _bytesReceived = 0;
@@ -40,19 +40,19 @@
     
     NSString *urlString = _article.mediaUrl;
 
-	NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
                                                        cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                    timeoutInterval:8];
     [req setAllowsCellularAccess:allowCellular];
     
-	_conn = [[NSURLConnection alloc] initWithRequest:req delegate:self];
+    _conn = [[NSURLConnection alloc] initWithRequest:req delegate:self];
     NSString *fname = [_article mediaFname];
     _fh = [NSFileHandle fileHandleForWritingAtPath:fname];
     if (_fh == nil) {
         [[NSFileManager defaultManager] createFileAtPath:fname contents:nil attributes:nil];
         _fh = [NSFileHandle fileHandleForWritingAtPath:fname];
     }
-	return self;
+    return self;
 }
 
 - (void)deleteExtraneousFiles
@@ -63,7 +63,7 @@
 
 - (void)start
 {
-	[_conn start];
+    [_conn start];
 }
 
 - (void)setDownloadQueue:(DownloadQueue *)q
@@ -74,7 +74,7 @@
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     _contentLength = [response expectedContentLength];
-//	NSLog(@"response.MIMEType: %@", response.MIMEType);
+//    NSLog(@"response.MIMEType: %@", response.MIMEType);
     _mimeType = response.MIMEType;
     [_queue downloadStartedForArticleId:_articleId];
 }

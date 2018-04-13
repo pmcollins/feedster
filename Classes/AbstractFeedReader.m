@@ -25,7 +25,7 @@
     
     _channelHandler = [[NodeHandler alloc] init];
     [_rssRdfNodeHandler setChildHandler:_channelHandler forKey:@"channel"];
-	
+
     _atomFeedHandler = [[NodeHandler alloc] init];
     [_rootNodeHandler setChildHandler:_atomFeedHandler forKey:@"feed"];
 

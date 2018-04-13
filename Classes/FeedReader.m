@@ -50,19 +50,19 @@
     [FeedReader addContentHandlerTo:_rssItemHandler name:@"link" property:@"link"];
     [FeedReader addContentHandlerTo:_rssItemHandler name:@"description" property:@"body"];
     [FeedReader addContentHandlerTo:_rssItemHandler name:@"pubDate" property:@"pubDateStr"];
-	NSDictionary *dict = @{@"url": @"mediaUrl", @"length": @"mediaLengthStr", @"type": @"mediaType"};
-	AttributeHandler *enclosureHandler = [[AttributeHandler alloc] initWithDictionary:dict];
-	[_rssItemHandler setChildHandler:enclosureHandler forKey:@"enclosure"];
-	[enclosureHandler setPropertyValueDelegate:_rssItemHandler];
+    NSDictionary *dict = @{@"url": @"mediaUrl", @"length": @"mediaLengthStr", @"type": @"mediaType"};
+    AttributeHandler *enclosureHandler = [[AttributeHandler alloc] initWithDictionary:dict];
+    [_rssItemHandler setChildHandler:enclosureHandler forKey:@"enclosure"];
+    [enclosureHandler setPropertyValueDelegate:_rssItemHandler];
 
-	RdfArticleHandler *rfih = [[RdfArticleHandler alloc] initWithReader:self];
-	[_rssRdfNodeHandler setChildHandler:rfih forKey:@"item"];
+    RdfArticleHandler *rfih = [[RdfArticleHandler alloc] initWithReader:self];
+    [_rssRdfNodeHandler setChildHandler:rfih forKey:@"item"];
     [FeedReader addContentHandlerTo:rfih name:@"title" property:@"title"];
     [FeedReader addContentHandlerTo:rfih name:@"guid" property:@"guid"];
     [FeedReader addContentHandlerTo:rfih name:@"link" property:@"link"];
     [FeedReader addContentHandlerTo:rfih name:@"description" property:@"body"];
-	[FeedReader addContentHandlerTo:rfih name:@"dc:date" property:@"pubDateStr"];
-	
+    [FeedReader addContentHandlerTo:rfih name:@"dc:date" property:@"pubDateStr"];
+
     //setup atom handlers
     _atomItemHandler = [[AtomArticleHandler alloc] initWithReader:self];
     [_atomFeedHandler setChildHandler:_atomItemHandler forKey:@"entry"];

@@ -16,7 +16,7 @@
 #pragma mark My Stuff
 
 - (void)setArticle:(Article *)article {
-	_article = article;
+    _article = article;
 }
 
 #pragma mark -
@@ -24,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	textField.text = label.text = textView.text = _article.guid;
+    textField.text = label.text = textView.text = _article.guid;
 }
 
 @end

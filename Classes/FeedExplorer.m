@@ -25,13 +25,13 @@
     [_channelHandler setChildHandler:titleHandler forKey:@"title"];
     [_atomFeedHandler setChildHandler:titleHandler forKey:@"title"];
 
-	ContentHandler *rssLinkHandler = [[ContentHandler alloc] initWithTagName:@"link" property:nil];
-	[_channelHandler setChildHandler:rssLinkHandler forKey:@"link"];
-	[rssLinkHandler setPropertyValueDelegate:self];
-	
-	AttributeHandler *atomLinkHandler = [[AttributeHandler alloc] initWithAttributeName:@"href" property:@"foo"];
-	[_atomFeedHandler setChildHandler:atomLinkHandler forKey:@"link"];
-	[atomLinkHandler setPropertyValueDelegate:self];
+    ContentHandler *rssLinkHandler = [[ContentHandler alloc] initWithTagName:@"link" property:nil];
+    [_channelHandler setChildHandler:rssLinkHandler forKey:@"link"];
+    [rssLinkHandler setPropertyValueDelegate:self];
+
+    AttributeHandler *atomLinkHandler = [[AttributeHandler alloc] initWithAttributeName:@"href" property:@"foo"];
+    [_atomFeedHandler setChildHandler:atomLinkHandler forKey:@"link"];
+    [atomLinkHandler setPropertyValueDelegate:self];
 
     return self;
 }
@@ -65,10 +65,10 @@
 {
     NSError *e;
     NSRegularExpression *regEx =
-		[NSRegularExpression regularExpressionWithPattern:@"<link(.*?)>"
-												  options:(NSRegularExpressionCaseInsensitive |
-														   NSRegularExpressionDotMatchesLineSeparators)
-													error:&e];
+        [NSRegularExpression regularExpressionWithPattern:@"<link(.*?)>"
+                                                  options:(NSRegularExpressionCaseInsensitive |
+                                                           NSRegularExpressionDotMatchesLineSeparators)
+                                                    error:&e];
     NSRegularExpression *tokenRex = [NSRegularExpression regularExpressionWithPattern:@"___(\\d+)___"
                                                                               options:0
                                                                                 error:&e];
@@ -143,9 +143,9 @@
 {
     NSURL *url = [NSURL URLWithString:urlString];
     NSString *scheme = [url scheme];
-	if (scheme == nil) {
-		return [NSString stringWithFormat:@"http://%@", urlString];
-	} else if ([scheme isEqualToString:@"feed"]) {
+    if (scheme == nil) {
+        return [NSString stringWithFormat:@"http://%@", urlString];
+    } else if ([scheme isEqualToString:@"feed"]) {
         return [urlString stringByReplacingOccurrencesOfString:@"feed://" withString:@"http://" options:NSCaseInsensitiveSearch range:NSMakeRange(0, 7)];
     }
     return urlString;
@@ -168,59 +168,59 @@
 
 - (NSData *)downloadFaviconAtDomain:(NSString *)domain
 {
-	NSURL *faviconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/favicon.ico", domain]];
-	NSURLResponse *response;
+    NSURL *faviconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/favicon.ico", domain]];
+    NSURLResponse *response;
 
     NSURLRequest *req = [NSURLRequest requestWithURL:faviconUrl
                                          cachePolicy:NSURLRequestUseProtocolCachePolicy
                                      timeoutInterval:4];
     
     NSData *data = [NSURLConnection sendSynchronousRequest:req
-										 returningResponse:&response
-													 error:nil];
+                                         returningResponse:&response
+                                                     error:nil];
 
-	UIImage *img = [UIImage imageWithData:data];
-	if (img) {
-		return data;
-	} else {
-		return nil;
-	}
+    UIImage *img = [UIImage imageWithData:data];
+    if (img) {
+        return data;
+    } else {
+        return nil;
+    }
 }
 
 - (void)downloadFaviconForLink:(NSString *)link
 {
-	NSURL *u = [NSURL URLWithString:link];
-	NSString *host = [u host];
+    NSURL *u = [NSURL URLWithString:link];
+    NSString *host = [u host];
     if (!host) {
         return;
     }
-	NSData *favicon = [self downloadFaviconAtDomain:host];
-	if (favicon) {
-		[self feed].favicon = favicon;
-	} else {
-		NSArray *a = [host componentsSeparatedByString:@"."];
+    NSData *favicon = [self downloadFaviconAtDomain:host];
+    if (favicon) {
+        [self feed].favicon = favicon;
+    } else {
+        NSArray *a = [host componentsSeparatedByString:@"."];
         if (a.count <= 2) {
             return;
         }
-		NSMutableArray *ma = [NSMutableArray arrayWithArray:a];
-		ma[0] = @"www";
-		NSString *wwwDomain = [ma componentsJoinedByString:@"."];
-		favicon = [self downloadFaviconAtDomain:wwwDomain];
-		if (favicon) {
-			[self feed].favicon = favicon;
-		}
-	}
+        NSMutableArray *ma = [NSMutableArray arrayWithArray:a];
+        ma[0] = @"www";
+        NSString *wwwDomain = [ma componentsJoinedByString:@"."];
+        favicon = [self downloadFaviconAtDomain:wwwDomain];
+        if (favicon) {
+            [self feed].favicon = favicon;
+        }
+    }
 }
 
 - (void)handlerFoundValue:(NSString *)str forName:(NSString *)name property:(NSString *)property
 {
-	if (name == nil) return;
-	if ([name isEqualToString:@"title"]) {
-		[self feed].title = str;
-		[_delegate explorerFoundFeed:feed];
-	} else if ([name isEqualToString:@"link"] || [name isEqualToString:@"href"]) {
-		[self downloadFaviconForLink:str];
-	}
+    if (name == nil) return;
+    if ([name isEqualToString:@"title"]) {
+        [self feed].title = str;
+        [_delegate explorerFoundFeed:feed];
+    } else if ([name isEqualToString:@"link"] || [name isEqualToString:@"href"]) {
+        [self downloadFaviconForLink:str];
+    }
 }
 
 - (void)handlerFoundValue:(NSString *)v
@@ -242,22 +242,22 @@
 - (void)resourceDownloadFinished:(ResourceDownload *)documentDownload
 {
     NSString *document = [documentDownload asString];
-	@try {
-		if (document == nil || document.length == 0) {
-			[NSException raise:@"EmptyDocumentForUrl" format:@"empty document"];
-		}
-		bool isFeed = [FeedExplorer documentAppearsToBeAFeed:document];
-		if (isFeed) {
-			[super loadDocument:document];
-		} else if (_findLinksIfNotAFeed) {
-			[self findLinksInDocument:documentDownload];
-		} else {
+    @try {
+        if (document == nil || document.length == 0) {
+            [NSException raise:@"EmptyDocumentForUrl" format:@"empty document"];
+        }
+        bool isFeed = [FeedExplorer documentAppearsToBeAFeed:document];
+        if (isFeed) {
+            [super loadDocument:document];
+        } else if (_findLinksIfNotAFeed) {
+            [self findLinksInDocument:documentDownload];
+        } else {
             [_delegate explorerExploded:@"Not a feed and no links in document"];
         }
-	}
-	@catch (NSException *e) {
-		[_delegate explorerExploded:[e reason]];
-	}
+    }
+    @catch (NSException *e) {
+        [_delegate explorerExploded:[e reason]];
+    }
 }
 
 @end

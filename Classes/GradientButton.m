@@ -78,14 +78,14 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-	self = [super initWithFrame:frame];
-	if (self)
+    self = [super initWithFrame:frame];
+    if (self)
     {
-		[self setOpaque:NO];
+        [self setOpaque:NO];
         self.backgroundColor = [UIColor clearColor];
         [self setupColors];
-	}
-	return self;
+    }
+    return self;
 }
 
 - (void)setupColors
@@ -184,7 +184,7 @@
     CGContextSetLineWidth(ctx, lineWidth);
     CGContextSetStrokeColorWithColor(ctx, [[UIColor blackColor] CGColor]);
     CGContextAddPath(ctx, path);
-	CGContextStrokePath(ctx);
+    CGContextStrokePath(ctx);
     
     CFRelease(path);
     
@@ -245,9 +245,9 @@
     CGGradientRef gradient = self.enabled ?
         ((self.state == UIControlStateHighlighted) ? [self highlightGradient] : [self normalGradient]) :
         [self disabledGradient];
-	CGPoint startGrad = CGPointMake(w / 2, p);
-	CGPoint endGrad = CGPointMake(w / 2, h - p);
-	CGContextDrawLinearGradient(ctx, gradient, startGrad, endGrad, (kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation));
+    CGPoint startGrad = CGPointMake(w / 2, p);
+    CGPoint endGrad = CGPointMake(w / 2, h - p);
+    CGContextDrawLinearGradient(ctx, gradient, startGrad, endGrad, (kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation));
     
     CFRelease(path);
     

@@ -10,9 +10,9 @@
 #import "Feed.h"
 
 @interface CDaySelector : UIViewController <UITableViewDataSource, UITableViewDelegate> {
-	NSArray *weekdays;
-	NSMutableSet *selectedDays;
-	Feed *feed;
+    NSArray *weekdays;
+    NSMutableSet *selectedDays;
+    Feed *feed;
 }
 
 @end
