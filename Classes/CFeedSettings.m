@@ -95,12 +95,12 @@
 - (IBAction)openPeriodSelector:(id)sender
 {
     COptionSelector *c = [[COptionSelector alloc] initWithOptions:@[
-                          @[@"Auto", @0],
-                          @[@"5 minutes", @5],
-                          @[@"15 minutes", @15],
-                          @[@"60 minutes", @60],
-                          @[@"240 minutes", @240]
-                          ] selected:feed.refreshPeriod feed:feed];
+        @[@"Auto", @0],
+        @[@"5 minutes", @5],
+        @[@"15 minutes", @15],
+        @[@"60 minutes", @60],
+        @[@"240 minutes", @240]
+    ] selected:feed.refreshPeriod feed:feed];
     CallbackAction ca = ^{
         [[M sharedInstance] saveMainContext];
         [self dismissModalViewControllerAnimated:YES];
