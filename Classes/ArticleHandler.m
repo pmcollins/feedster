@@ -12,7 +12,6 @@
 #import "FeedReader.h"
 
 @interface ArticleHandler () {
-//    NSDate *_oldArticleCutoffDate;
 } @end
 
 @implementation ArticleHandler
@@ -20,20 +19,10 @@
 - (id)initWithReader:(FeedReader *)reader
 {
     self = [super init];
-    
     _feedReader = reader;
-    
     now = [NSDate date];
-
-//    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-//    NSDateComponents *cmp = [[NSDateComponents alloc] init];
-//    [cmp setDay:-(kOldArticleCutoffDaysAgo)];
-//    _oldArticleCutoffDate = [gregorian dateByAddingComponents:cmp toDate:[NSDate date] options:0];
-
     itemCounter = 0;
-
     [self setDateFormat];
-
     return self;
 }
 
@@ -79,8 +68,8 @@
     {
         [[_feedReader context] deleteObject:article];
         [(NSObject *)[_feedReader updateQueueListener] performSelectorOnMainThread:@selector(discardingExistingItem)
-                                                          withObject:nil
-                                                       waitUntilDone:NO];
+                                                                        withObject:nil
+                                                                     waitUntilDone:NO];
     } else {
         article.fromFirstUpdate = @(![[_feedReader feed].completedFirstUpdate boolValue]);
         article.mediaLength = @0.0f;
