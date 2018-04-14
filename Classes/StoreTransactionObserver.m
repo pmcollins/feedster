@@ -3,7 +3,6 @@
 //  XReader
 //
 //  Created by Pablo Collins on 2/3/13.
-//  Copyright (c) 2013 Trickbot. All rights reserved.
 //
 
 #import "StoreTransactionObserver.h"

@@ -3,7 +3,6 @@
 //  RC4
 //
 //  Created by Pablo Collins on 8/29/10.
-//  Copyright 2010 Trickbot. All rights reserved.
 //
 
 #import "M.h"

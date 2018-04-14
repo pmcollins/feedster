@@ -3,7 +3,6 @@
 //  XReader
 //
 //  Created by Pablo Collins on 3/5/11.
-//  Copyright 2011 trickbot. All rights reserved.
 //
 
 #import "CAppSettings.h"

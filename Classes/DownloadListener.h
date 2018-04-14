@@ -3,7 +3,6 @@
 //  XReader
 //
 //  Created by Pablo Collins on 5/6/12.
-//  Copyright (c) 2012 Trickbot. All rights reserved.
 //
 
 #import "Article.h"

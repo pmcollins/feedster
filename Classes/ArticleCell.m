@@ -3,7 +3,6 @@
 //  XReader
 //
 //  Created by Pablo Collins on 2/20/11.
-//  Copyright 2011 trickbot. All rights reserved.
 //
 
 #import "ArticleCell.h"

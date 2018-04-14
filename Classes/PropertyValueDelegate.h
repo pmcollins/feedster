@@ -3,7 +3,6 @@
 //  XReader
 //
 //  Created by Pablo Collins on 11/20/10.
-//  Copyright 2010 Trickbot. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

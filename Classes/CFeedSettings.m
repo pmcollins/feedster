@@ -3,7 +3,6 @@
 //  XReader
 //
 //  Created by Pablo Collins on 1/28/11.
-//  Copyright 2011 trickbot. All rights reserved.
 //
 
 #import "CFeedSettings.h"

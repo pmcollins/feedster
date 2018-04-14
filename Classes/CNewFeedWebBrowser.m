@@ -3,7 +3,6 @@
 //  XReader
 //
 //  Created by Pablo Collins on 10/22/12.
-//  Copyright (c) 2012 Trickbot. All rights reserved.
 //
 
 #import "CNewFeedWebBrowser.h"
